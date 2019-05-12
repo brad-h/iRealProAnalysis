@@ -23,4 +23,4 @@ TODO
 Overall
 -------
 
-Where should be efforts/time be focused?
+Where should my efforts/time be focused?
