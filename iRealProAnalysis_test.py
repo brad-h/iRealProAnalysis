@@ -1,4 +1,4 @@
-from iRealProAnalysis import get_tunes, JAZZ1350, RHYTHM_CHANGES, KEYS, parse_chord, Chord, split_chords_in_measure, extension_to_quality
+from iRealProAnalysis import get_tunes, JAZZ1350, RHYTHM_CHANGES, KEYS, Chord, parse_chord, split_chords_in_measure, extension_to_quality
 from ddt import ddt, data
 from unittest import TestCase, main
 from collections import namedtuple
@@ -37,7 +37,12 @@ class DataTests(TestCase):
         
         self.assertTrue(all(x in all_notes for x in remove_sharps_flats))
 
-    @data(Case("7", "Dominant"), Case("^7", "Major"), Case("-7", "Minor"), Case("h7", "Half-Diminished"), Case("o7", "Diminished"))
+    @data(
+        Case("7", "Dominant"),
+        Case("^7", "Major"),
+        Case("-7", "Minor"),
+        Case("h7", "Half-Diminished"),
+        Case("o7", "Diminished"))
     def test_extention_to_quality(self, tc):
         actual = extension_to_quality(tc.data)
         self.assertEqual(actual, tc.expected)
@@ -45,34 +50,34 @@ class DataTests(TestCase):
     @data(*map("".join, product("ABCDEFG", "#b", "7")))
     def test_parse_dominant_chord_symbol(self, tc):
         actual = parse_chord(tc)
-        expected = Case(tc.replace("7", ""), "Dominant")
+        expected = Chord(tc.replace("7", ""), "Dominant", None)
         self.assertEqual(actual, expected)
 
     @data(*map("".join, product("ABCDEFG", "#b", ["", "^", "^7", "6"])))
     def test_parse_major_chord_symbol(self, tc):
         actual = parse_chord(tc)
         note = tc.replace("^", "").replace("7", "").replace("6", "")
-        expected = Case(note, "Major")
+        expected = Chord(note, "Major", None)
         self.assertEqual(actual, expected)
 
     @data(*map("".join, product("ABCDEFG", "#b", ["-", "-7"])))
     def test_parse_minor_chord_symbol(self, tc):
         actual = parse_chord(tc)
         note = tc.replace("-", "").replace("7", "")
-        expected = Case(note, "Minor")
+        expected = Chord(note, "Minor", None)
         self.assertEqual(actual, expected)
 
     @data(*map("".join, product("ABCDEFG", "#b", ["h7"])))
     def test_parse_halfdiminished_chord_symbol(self, tc):
         actual = parse_chord(tc)
-        expected = Case(tc.replace("h7", ""), "Half-Diminished")
+        expected = Chord(tc.replace("h7", ""), "Half-Diminished", None)
         self.assertEqual(actual, expected)
 
     @data(*map("".join, product("ABCDEFG", "#b", ["o", "o7"])))
     def test_parse_diminished_chord_symbol(self, tc):
         actual = parse_chord(tc)
         note = tc.replace("o", "").replace("7", "")
-        expected = Case(note, "Diminished")
+        expected = Chord(note, "Diminished", None)
         self.assertEqual(actual, expected)
     
     @data("Bb6/F", "Bb7/D")
