@@ -39,9 +39,14 @@ class DataTests(TestCase):
 
     @data(
         Case("7", "Dominant"),
+        Case("", "Major"),
+        Case("^", "Major"),
         Case("^7", "Major"),
+        Case("6", "Major"),
+        Case("-", "Minor"),
         Case("-7", "Minor"),
         Case("h7", "Half-Diminished"),
+        Case("o", "Diminished"),
         Case("o7", "Diminished"))
     def test_extention_to_quality(self, tc):
         actual = extension_to_quality(tc.data)
