@@ -14,9 +14,6 @@ class Jazz1350Tests(TestCase):
         all_keys = set(KEYS.keys())
         self.assertTrue(unique_keys_in_dataset.issubset(all_keys))
     
-    def test_unique_chord_symbols(self):
-        chords = set(map(lambda x: x.chord_string, self.tunes))
-        return
 
 class RhythmTests(TestCase):
     @classmethod
@@ -51,16 +48,18 @@ class DataTests(TestCase):
         expected = Case(tc.replace("7", ""), "Dominant")
         self.assertEqual(actual, expected)
 
-    @data(*map("".join, product("ABCDEFG", "#b", ["^7", "6"])))
+    @data(*map("".join, product("ABCDEFG", "#b", ["", "^", "^7", "6"])))
     def test_parse_major_chord_symbol(self, tc):
         actual = parse_chord(tc)
-        expected = Case(tc.replace("^7", ""), "Major")
+        note = tc.replace("^", "").replace("7", "").replace("6", "")
+        expected = Case(note, "Major")
         self.assertEqual(actual, expected)
 
-    @data(*map("".join, product("ABCDEFG", "#b", ["-7"])))
+    @data(*map("".join, product("ABCDEFG", "#b", ["-", "-7"])))
     def test_parse_minor_chord_symbol(self, tc):
         actual = parse_chord(tc)
-        expected = Case(tc.replace("-7", ""), "Minor")
+        note = tc.replace("-", "").replace("7", "")
+        expected = Case(note, "Minor")
         self.assertEqual(actual, expected)
 
     @data(*map("".join, product("ABCDEFG", "#b", ["h7"])))
@@ -69,10 +68,11 @@ class DataTests(TestCase):
         expected = Case(tc.replace("h7", ""), "Half-Diminished")
         self.assertEqual(actual, expected)
 
-    @data(*map("".join, product("ABCDEFG", "#b", ["o7"])))
+    @data(*map("".join, product("ABCDEFG", "#b", ["o", "o7"])))
     def test_parse_diminished_chord_symbol(self, tc):
         actual = parse_chord(tc)
-        expected = Case(tc.replace("o7", ""), "Diminished")
+        note = tc.replace("o", "").replace("7", "")
+        expected = Case(note, "Diminished")
         self.assertEqual(actual, expected)
     
     @data("Bb6/F", "Bb7/D")

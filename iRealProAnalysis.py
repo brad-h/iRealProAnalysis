@@ -58,17 +58,21 @@ Chord = namedtuple("Chord", ["key", "quality"])
 
 def extension_to_quality(extension):
     lookup = {
+        "":   "Major",
+        "^":  "Major",
         "^7": "Major",
         "6":  "Major",
         "7":  "Dominant",
+        "-":  "Minor",
         "-7": "Minor",
         "h7": "Half-Diminished",
+        "o":  "Diminished",
         "o7": "Diminished"
     }
     return lookup[extension]
 
 def parse_chord(chord):
-    [(key,extension)] = re.findall(r"([A-G][#b]?)(7|6|\^7|-7|h7|o7)?", chord)
+    [(key,extension)] = re.findall(r"([A-G][#b]?)(7|6|\^7|\^|-7|-|h7|o7?)?", chord)
     return Chord(key, extension_to_quality(extension))
 
 if __name__ == "__main__":
@@ -92,7 +96,7 @@ if __name__ == "__main__":
         # chords = re.sub(r"*[A-Z]", "", chords)
         for measure in tune.measures_as_strings:
             all_chords.add(measure)
-    with open("chords.txt", "w") as file:
+    with open(os.path.join(".out", "chords.txt"), "w") as file:
         file.writelines(x + "\n" for x in sorted(all_chords))
     #cgroup = os.linesep.join("; ".join(x.title for x in v) for (k, v) in chart_frequency.items() if len(v) > 1)
     
