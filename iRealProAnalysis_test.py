@@ -85,9 +85,12 @@ class DataTests(TestCase):
         expected = Chord(note, "Diminished", None)
         self.assertEqual(actual, expected)
     
-    @data("Bb6/F", "Bb7/D")
+    @data(
+        Case("Bb6/F", Chord("Bb", "Major", "F")),
+        Case("Bb7/D", Chord("Bb", "Dominant", "D")))
     def test_parse_slash_bass_note(self, tc):
-        pass
+        actual = parse_chord(tc.data)
+        self.assertEqual(actual, tc.expected)
 
     @data("D7", "G7", "F7", "Bb6", "C7")
     def test_split_single_chord_in_bar(self, tc):

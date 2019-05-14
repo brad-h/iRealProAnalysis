@@ -54,7 +54,7 @@ def get_tunes(file_name):
 def split_chords_in_measure(bar):
     return [bar]
 
-Chord = namedtuple("Chord", ["key", "quality", "bass_note"])
+Chord = namedtuple("Chord", "key quality bass_note")
 
 def extension_to_quality(extension):
     lookup = {
@@ -71,9 +71,17 @@ def extension_to_quality(extension):
     }
     return lookup[extension]
 
+def parse_bass_note(slash_chord):
+    if slash_chord[:1] == "/":
+        return slash_chord[1:]
+    else:
+        return None
+
 def parse_chord(chord):
-    [(key,extension)] = re.findall(r"([A-G][#b]?)(7|6|\^7|\^|-7|-|h7|o7?)?", chord)
-    return Chord(key, extension_to_quality(extension), None)
+    [(key,extension, slash_chord)] = re.findall(r"([A-G][#b]?)(7|6|\^7|\^|-7|-|h7|o7?)?(/[A-G][#b]?)?", chord)
+    quality = extension_to_quality(extension)
+    bass_note = parse_bass_note(slash_chord)
+    return Chord(key, quality, bass_note)
 
 if __name__ == "__main__":
     tunes = get_tunes(JAZZ1350)
