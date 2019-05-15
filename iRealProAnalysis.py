@@ -51,10 +51,16 @@ def get_tunes(file_name):
     tunes = Tune.parse_ireal_url(contents)
     return tunes
 
-def split_chords_in_measure(bar):
-    return [bar]
-
 Chord = namedtuple("Chord", "key quality bass_note")
+
+def split_chords_in_measure(bar):
+    chords = re.findall(r"([A-G][#b]?)(7|6|\^7|\^|-7|-|h7|o7?)?(/[A-G][#b]?)?", bar)
+    result = []
+    for (key, extension, slash_chord) in chords:
+        quality = extension_to_quality(extension)
+        bass_note = parse_bass_note(slash_chord)
+        result.append(Chord(key, quality, bass_note))
+    return result
 
 def extension_to_quality(extension):
     lookup = {
@@ -78,39 +84,31 @@ def parse_bass_note(slash_chord):
         return None
 
 def parse_chord(chord):
-    [(key,extension, slash_chord)] = re.findall(r"([A-G][#b]?)(7|6|\^7|\^|-7|-|h7|o7?)?(/[A-G][#b]?)?", chord)
-    quality = extension_to_quality(extension)
-    bass_note = parse_bass_note(slash_chord)
-    return Chord(key, quality, bass_note)
+    return split_chords_in_measure(chord)[0]
+
+def convert_to_roman_numeral(key, chord):
+    roman_numerals = "I II III IV V VI VII".split(" ")
+    scale = KEYS[key].split(" ")
+    assert isinstance(scale, list)
+    chord_scale = scale.index(chord.key)
+    return chord._replace(key=roman_numerals[chord_scale])
 
 if __name__ == "__main__":
     tunes = get_tunes(JAZZ1350)
     key_frequency = defaultdict(int)
     chart_frequency = defaultdict(list)
-    all_chords = set()
-    
+    not_quite_contrafacts = defaultdict(list)
+
     for tune in tunes:
         assert isinstance(tune, Tune)
         key_frequency[tune.key] += 1
         chart_frequency[tune.chord_string].append(tune)
-        # chords = (tune.chord_string
-        #     .replace("|x", "")
-        #     .replace("|", " ")
-        #     .replace("{", "")
-        #     .replace("}", "")
-        #     .replace("[", "")
-        #     .replace("]", ""))
-        # chords = re.sub(r"T\d\d", "", chords)
-        # chords = re.sub(r"*[A-Z]", "", chords)
-        for measure in tune.measures_as_strings:
-            all_chords.add(measure)
-    with open(os.path.join(".out", "chords.txt"), "w") as file:
-        file.writelines(x + "\n" for x in sorted(all_chords))
-    #cgroup = os.linesep.join("; ".join(x.title for x in v) for (k, v) in chart_frequency.items() if len(v) > 1)
+        chords_in_tune = tuple(chord for measure in tune.measures_as_strings for chord in split_chords_in_measure(measure))
+        not_quite_contrafacts[chords_in_tune].append(tune)
     
-    # print(cgroup)
-    print(sorted([(f, k) for (k, f) in key_frequency.items()], reverse=True))
-    minor_count = sum(f for (x, f) in key_frequency.items() if x.find("-") >= 0)
-    print("Minors: " + str(minor_count))
-    major_count = sum(f for (x, f) in key_frequency.items() if x.find("-") < 0)
-    print("Majors: " + str(major_count))
+    for (k, v) in not_quite_contrafacts.items():
+        if len(v) > 1:
+            for tune in v:
+                print(tune.title)
+            print()
+    

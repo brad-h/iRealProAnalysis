@@ -1,4 +1,4 @@
-from iRealProAnalysis import get_tunes, JAZZ1350, RHYTHM_CHANGES, KEYS, Chord, parse_chord, split_chords_in_measure, extension_to_quality
+from iRealProAnalysis import get_tunes, JAZZ1350, RHYTHM_CHANGES, KEYS, Chord, parse_chord, split_chords_in_measure, extension_to_quality, convert_to_roman_numeral
 from ddt import ddt, data
 from unittest import TestCase, main
 from collections import namedtuple
@@ -98,18 +98,46 @@ class DataTests(TestCase):
         self.assertEqual(len(chords), 1)
     
     @data("Bb6F7", "Bb6/FF7", "Bb6/FEb9", "D-7G7", "Eb7Eo7", "D-7G-7", "Bb7Bb7/D", "Bb6G-7", "C-7F7")
-    def atest_split_two_chords_in_bar(self, tc):
+    def test_split_two_chords_in_bar(self, tc):
         chords = split_chords_in_measure(tc)
         self.assertEqual(len(chords), 2)
     
-    @data("Bb6F7Bb6G-7")
-    def atest_split_four_chords_in_bar(self, tc):
+    @data("Bb6F7Bb6G-7", "Bb7Bb7/DBb6G-7")
+    def test_split_four_chords_in_bar(self, tc):
         chords = split_chords_in_measure(tc)
         self.assertEqual(len(chords), 4)
+    
+    @data(
+        ("C", "C^7", "I"),
+        ("F", "G-7", "II"),
+        ("Bb", "D-7", "III"),
+        ("Eb", "Ab^7", "IV"),
+        ("Db", "Ab7", "V"),
+        ("Gb", "Eb-7", "VI"),
+        ("B", "B^7", "I"),
+        ("E", "F#-7", "II"),
+        ("A", "C#-7", "III"),
+        ("D", "G^7", "IV"),
+        ("G", "D7", "V"),
+        ("C-", "C-7", "I"),
+        ("F-", "Gh7", "II"),
+        ("Bb-", "Db^7", "III"),
+        ("Eb-", "Ab-7", "IV"),
+        ("C#-", "G#7", "V"),
+        ("F#-", "D^7", "VI"),
+        ("B-", "A7", "VII"),
+        ("E-", "E-7", "I"),
+        ("A-", "Bh7", "II"),
+        ("D-", "F^7", "III"),
+        ("G-", "C-7", "IV"))
+    def test_roman_numeral_conversion(self, tc):
+        (key, chord, expected) = tc
+        data = parse_chord(chord)
 
-    @data()
-    def test_parse_chord(self):
-        parse_chord("")
+        actual = convert_to_roman_numeral(key, data)
+
+        self.assertEqual(expected, actual.key)
+
 
 if __name__ == "__main__":
     main().runTests()
