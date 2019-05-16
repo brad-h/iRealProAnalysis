@@ -86,12 +86,29 @@ def parse_bass_note(slash_chord):
 def parse_chord(chord):
     return split_chords_in_measure(chord)[0]
 
+def distance_from_natural(note):
+    flats = len([x for x in note if x == "b"])
+    sharps = len([x for x in note if x == "#"])
+    return sharps - flats
+
+def _strip_sharps_flats(note):
+    return note.replace("b", "").replace("#", "")
+
+def _distance_to_sharps_flats(distance):
+    if distance > 0:
+        return "#" * distance
+    elif distance < 0:
+        return "b" * abs(distance)
+    else:
+        return ""
+
 def convert_to_roman_numeral(key, chord):
     roman_numerals = "I II III IV V VI VII".split(" ")
     scale = KEYS[key].split(" ")
-    assert isinstance(scale, list)
-    chord_scale = scale.index(chord.key)
-    return chord._replace(key=roman_numerals[chord_scale])
+    scale_notes = [_strip_sharps_flats(x) for x in scale]
+    scale_position = scale_notes.index(_strip_sharps_flats(chord.key))
+    distance = distance_from_natural(scale[scale_position]) + distance_from_natural(chord.key)
+    return chord._replace(key=roman_numerals[scale_position] + _distance_to_sharps_flats(distance))
 
 if __name__ == "__main__":
     tunes = get_tunes(JAZZ1350)
