@@ -130,7 +130,7 @@ class DataTests(TestCase):
         ("A-", "Bh7", "II"),
         ("D-", "F^7", "III"),
         ("G-", "C-7", "IV"))
-    def atest_roman_numeral_conversion(self, tc):
+    def test_roman_numeral_conversion(self, tc):
         (key, chord, expected) = tc
         data = parse_chord(chord)
 
