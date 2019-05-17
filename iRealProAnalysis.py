@@ -3,6 +3,7 @@ from collections import defaultdict, namedtuple
 from enum import Enum
 import re
 import os
+from itertools import islice
 
 KEYS = {
     "C":   "C D E F G A B",
@@ -110,22 +111,64 @@ def convert_to_roman_numeral(key, chord):
     distance = distance_from_natural(chord.key) - distance_from_natural(scale[scale_position])
     return chord._replace(key=roman_numerals[scale_position] + _distance_to_sharps_flats(distance))
 
+def short_form(chord):
+    assert isinstance(chord, Chord)
+    lookup = {
+        "Major": "M7",
+        "Dominant": "7",
+        "Minor": "m7",
+        "Half-Diminished": "-7b5",
+        "Diminished": "o7"
+    }
+    return chord.key + lookup[chord.quality]
+
+# https://stackoverflow.com/a/6822773
+def window(seq, n=2):
+    "Returns a sliding window (of width n) over data from the iterable"
+    "   s -> (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   "
+    it = iter(seq)
+    result = tuple(islice(it, n))
+    if len(result) == n:
+        yield result
+    for elem in it:
+        result = result[1:] + (elem,)
+        yield result
+
 if __name__ == "__main__":
     tunes = get_tunes(JAZZ1350)
     key_frequency = defaultdict(int)
     chart_frequency = defaultdict(list)
     not_quite_contrafacts = defaultdict(list)
 
+    two = defaultdict(int)
+    three = defaultdict(int)
+    four = defaultdict(int)
+    eight = defaultdict(int)
+    groupings = [(two, 2), (three, 3), (four, 4), (eight, 8)]
+
     for tune in tunes:
         assert isinstance(tune, Tune)
         key_frequency[tune.key] += 1
         chart_frequency[tune.chord_string].append(tune)
-        chords_in_tune = tuple(chord for measure in tune.measures_as_strings for chord in split_chords_in_measure(measure))
+        chords_in_tune = tuple(convert_to_roman_numeral(tune.key, chord) for measure in tune.measures_as_strings for chord in split_chords_in_measure(measure))
         not_quite_contrafacts[chords_in_tune].append(tune)
+
+        for (coll, n) in groupings:
+            for group in window(chords_in_tune, n):
+                coll[group] += 1
     
+    _ = """
     for (k, v) in not_quite_contrafacts.items():
         if len(v) > 1:
             for tune in v:
-                print(tune.title)
+                print(tune.title + ": " + tune.key)
             print()
-    
+    #"""
+
+    for (coll, n) in groupings:
+        top_20 = islice(sorted(coll.items(), reverse=True, key=lambda x: x[1]), 20)
+        print("top 20 progressions of length: " + repr(n))
+        for (progression, frequency) in top_20:
+            prog = tuple(short_form(chord) for chord in progression)
+            print(repr(prog) + " was found " + repr(frequency) + " times")
+
