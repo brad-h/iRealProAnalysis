@@ -107,7 +107,7 @@ def convert_to_roman_numeral(key, chord):
     scale = KEYS[key].split(" ")
     scale_notes = [_strip_sharps_flats(x) for x in scale]
     scale_position = scale_notes.index(_strip_sharps_flats(chord.key))
-    distance = distance_from_natural(scale[scale_position]) + distance_from_natural(chord.key)
+    distance = distance_from_natural(chord.key) - distance_from_natural(scale[scale_position])
     return chord._replace(key=roman_numerals[scale_position] + _distance_to_sharps_flats(distance))
 
 if __name__ == "__main__":

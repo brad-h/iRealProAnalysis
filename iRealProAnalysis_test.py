@@ -154,7 +154,11 @@ class DataTests(TestCase):
 
     @data(
         ("C", "Db7", "IIb"), # tritone sub
-        ("F", "Eb7", "VIIb"), # bVII7
+        ("F", "Eb7", "VIIb"),
+        ("Bb", "E7", "IV#"),
+        ("Bb", "Abb7", "VIIb"),
+        ("E", "D7", "VIIb"),
+        ("E", "F7", "IIb") # tritone sub
     )
     def test_roman_numeral_conversion_outside_harmony(self, tc):
         (key, chord, expected) = tc
