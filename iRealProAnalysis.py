@@ -140,10 +140,10 @@ if __name__ == "__main__":
     chart_frequency = defaultdict(list)
     not_quite_contrafacts = defaultdict(list)
 
-    two = defaultdict(int)
-    three = defaultdict(int)
-    four = defaultdict(int)
-    eight = defaultdict(int)
+    two = defaultdict(list)
+    three = defaultdict(list)
+    four = defaultdict(list)
+    eight = defaultdict(list)
     groupings = [(two, 2), (three, 3), (four, 4), (eight, 8)]
 
     for tune in tunes:
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 
         for (coll, n) in groupings:
             for group in window(chords_in_tune, n):
-                coll[group] += 1
+                coll[" ".join(short_form(chord) for chord in group)].append(tune)
     
     _ = """
     for (k, v) in not_quite_contrafacts.items():
@@ -166,9 +166,9 @@ if __name__ == "__main__":
     #"""
 
     for (coll, n) in groupings:
-        top_20 = islice(sorted(coll.items(), reverse=True, key=lambda x: x[1]), 20)
-        print("top 20 progressions of length: " + repr(n))
+        top_20 = islice(sorted(coll.items(), reverse=True, key=lambda x: len(x[1])), 20)
+        print("top 20 progressions of length: " + str(n))
         for (progression, frequency) in top_20:
-            prog = tuple(short_form(chord) for chord in progression)
-            print(repr(prog) + " was found " + repr(frequency) + " times")
+            print(progression + " was found " + str(len(frequency)) + " times")
+        print()
 
