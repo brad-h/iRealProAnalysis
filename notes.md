@@ -166,7 +166,7 @@ Lessons
                 * `3-7-#9` (ask Doc about this one - tri-tone substitutes?)
             * Minor
                 * `1-4-7` or `5-1-4`
-                * `2-6-1` or `6-2-5`
+                * `2-5-1` or `6-2-5`
             * Half-Diminished
                 * `1-4-7` or `5-1-4`
                 * `7-3-6` or `6-2-5`
