@@ -145,7 +145,7 @@ Lessons
             * `b2-b5-b1-b4-b6` or `b6-b2-b5-b1-b4` Secondary "outside" (in-between)
         * Half-Diminished
             * `1-5-1-4-7` or `5-1-4-7-3`
-            * `7-3-6-2-4` or `4-7-3-6-9`
+            * `7-3-6-2-4` or `4-7-3-6-2`
             * same as the minor voicings (`Bbm7` <-> `Cm7b5`)
                 * Notice that the secondary options for Half-Diminished are primary options for Minor, and vice versa
         * Diminished
