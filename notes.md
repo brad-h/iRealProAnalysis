@@ -163,7 +163,9 @@ Lessons
             * Dominant
                 * `3-6-9` or `7-3-6`
                 * `b3-b6-b9` or `b6-b2-b5` (altered dominants)
-                * `3-7-#9` (ask Doc about this one - tri-tone substitutes?)
+                    * `b3-b6-b9` tri-tone sub is `6-2-5`
+                    * `b6-b2-b5` tri-tone sub is `2-5-1`
+                * `3-7-#9` or `7-#2-#5` (ask Doc about this one - tri-tone substitutes?)
             * Minor
                 * `1-4-7` or `5-1-4`
                 * `2-5-1` or `6-2-5`
