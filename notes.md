@@ -292,7 +292,7 @@ There are two approaches to language development: transcription and composition.
    1. Identify the sound the line is played over
    2. Use theory to deconstruct the line into the hierarchy
    3. Identify devices used
-   4. Remove the devices to find the underlying harmonic fragment used
+   4. Identify the underlying harmonic fragment(s) used
 2. Compose a line from a harmonic fragment
    1. Within a sound, find a harmonic fragments that exist within that sound
    2. Derive a melody from the harmonic fragment
