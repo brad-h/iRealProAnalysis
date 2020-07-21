@@ -261,24 +261,43 @@ TBD
 Language Development
 --------------------
 
-There are two approaches to language development: transcription and composition.
+The context of language is sound, such as dorian or `ii-V`.
 
+Lines are comprised of (strongest to weakest relationship to harmony):
+1. Chord tones
+2. Scale tones
+3. Outside tones
+
+Harmonic fragments are shapes within a particular sound.
+1. Triads (major, minor, diminished, augmented)
+2. Pentatonics/blues (major, minor)
+3. Quartal shapes
+
+Melodies can be derived from harmonic fragments:
+1. Vertical -> Horizontal
+2. Ascending / Descending
+
+Devices embellish and abstract harmonic fragments:
+1. Neighboring tones:
+   1. Half-step approachments
+   2. Passing tones
+   2. Enclosures
+2. Neighboring fragments:
+   1. Adjacent fragments above or below
+   2. Chromatic - typically outside
+   3. Diatonic - typically inside "upper extensions"
+
+There are two approaches to language development: transcription and composition.
 1. Transcribe a line and deconstruct it
-   1. Find a line that is played within a sound (such as Dorian or ii-V)
-   2. Use theory to deconstruct the line and identify the melody in the following hierarchy (strongest to weakest relationship to harmony):
-      1. Chord tones
-      2. Scale tones
-      3. Outside tones
-   3. Identify devies used
-   4. Create variations by adding/removing tones, altering the rhythm, or superimposing on another sound
-2. Construct a line from harmony
-   1. Within a sound (such as Dorian or ii-V), find shapes (harmonic fragments) that exist within that sound:
-      1. Triads (major, minor, diminished, augmented)
-      2. Pentatonics/blues (major, minor)
-      3. Quartal shapes
-   2. Turn the shape into a melody
-      1. Ascending/descending
-   3. Use devices to embellish and abstract the shape
-      1. Half-step approachments, neighboring tones, enclosures, passing tones.
-      2. Playing under/over the shape inside and outside (usually a whole step above is an upper extension)
-   4. Play the line with different melodic harmonization approaches
+   1. Identify the sound the line is played over
+   2. Use theory to deconstruct the line into the hierarchy
+   3. Identify devices used
+   4. Remove the devices to find the underlying harmonic fragment used
+2. Compose a line from a harmonic fragment
+   1. Within a sound, find a harmonic fragments that exist within that sound
+   2. Derive a melody from the harmonic fragment
+
+Now that you have a basic line, create variations.
+1. Add, reapply and rearrange devices to embellish and abstract the harmonic fragment
+2. Play the line with different melodic harmonization approaches
+   1. Not all techniques will work for all lines. Try them and find what works.
