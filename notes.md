@@ -261,7 +261,10 @@ TBD
 Language Development
 --------------------
 
-The context of language is sound, such as dorian or `ii-V`.
+The context of language is sound, such as:
+1. Minor 7th chord
+2. Dorian chordscale
+3. `ii-V` progression
 
 Lines are comprised of (strongest to weakest relationship to harmony):
 1. Chord tones
@@ -290,14 +293,15 @@ Devices embellish and abstract harmonic fragments:
 There are two approaches to language development: transcription and composition.
 1. Transcribe a line and deconstruct it
    1. Identify the sound the line is played over
-   2. Use theory to deconstruct the line into the hierarchy
-   3. Identify devices used
-   4. Identify the underlying harmonic fragment(s) used
+   2. Deconstruct the line into the hierarchy
+      1. Identify devices used
+      2. Identify the underlying harmonic fragment(s) used
 2. Compose a line from a harmonic fragment
    1. Within a sound, find a harmonic fragments that exist within that sound
    2. Derive a melody from the harmonic fragment
 
 Now that you have a basic line, create variations.
 1. Add, reapply and rearrange devices to embellish and abstract the harmonic fragment
+2. Alter the rhythmic context by playing the line in a different time-feel: style, straight/swung, tempo, time signature
 2. Play the line with different melodic harmonization approaches
    1. Not all techniques will work for all lines. Try them and find what works.
