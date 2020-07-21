@@ -232,8 +232,53 @@ Harmonic Development
     3. Locked-Hands (George Shearing)
     4. Tertiary Shapes (Keith Jarrett, everyone)
     5. Quartal Shapes (Chick Corea)
+    6. Quartal with Leading Tone
+       1. Melody note with a fourthy shell one whole step plus an octave below
+       2. This technique can be used where notes of the shell are outside the scale
+       3. A C melody note would have a Bb Eb Ab shell (Bb being a whole step below C)
+    7. Quartal shell as Leading Tone
+       1. Melody note is the leading tone of a fourthy shell
+       2. This technique can be used where notes of the shell are inside the scale.
+       3. A C melody note could be harmonized as
+          1. P4+P4: D G C
+          2. TT+P4: Db G C
+          3. P4+M3: E A C
+          4. Other options are P4+TT and TT+TT
+    8. Quartal voicing as a Leading note
+       1. Melody note is the leading tone of a fourthy voicing
+       2. This technique can be used where notes of the shell are inside the scale.
+       3. A C melody note could be harmonized as
+          1. P4+P4+P4+P4: E A D G C
+          2. TT+P4+P4+P4: Eb A D G C
+          3. P4+P4+P4+M3: Gb B E A C
+          4. Other options are combinations of P4, TT and M3
 
 Rhythmic Development
 --------------------
 
 TBD
+
+Language Development
+--------------------
+
+There are two approaches to language development: transcription and composition.
+
+1. Transcribe a line and deconstruct it
+   1. Find a line that is played within a sound (such as Dorian or ii-V)
+   2. Use theory to deconstruct the line and identify the melody in the following hierarchy (strongest to weakest relationship to harmony):
+      1. Chord tones
+      2. Scale tones
+      3. Outside tones
+   3. Identify devies used
+   4. Create variations by adding/removing tones, altering the rhythm, or superimposing on another sound
+2. Construct a line from harmony
+   1. Within a sound (such as Dorian or ii-V), find shapes (harmonic fragments) that exist within that sound:
+      1. Triads (major, minor, diminished, augmented)
+      2. Pentatonics/blues (major, minor)
+      3. Quartal shapes
+   2. Turn the shape into a melody
+      1. Ascending/descending
+   3. Use devices to embellish and abstract the shape
+      1. Half-step approachments, neighboring tones, enclosures, passing tones.
+      2. Playing under/over the shape inside and outside (usually a whole step above is an upper extension)
+   4. Play the line with different melodic harmonization approaches
