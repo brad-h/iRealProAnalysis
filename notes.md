@@ -243,15 +243,18 @@ Harmonic Development
           1. P4+P4: D G C
           2. TT+P4: Db G C
           3. P4+M3: E A C
-          4. Other options are P4+TT and TT+TT
+          4. M3+P4: Eb G C
+          5. Other options are P4+TT and TT+TT
     8. Quartal voicing as a Leading note
        1. Melody note is the leading tone of a fourthy voicing
        2. This technique can be used where notes of the shell are inside the scale.
        3. A C melody note could be harmonized as
           1. P4+P4+P4+P4: E A D G C
           2. TT+P4+P4+P4: Eb A D G C
-          3. P4+P4+P4+M3: Gb B E A C
-          4. Other options are combinations of P4, TT and M3
+          3. TT+TT+P4+P4: D Ab D G C
+          4. P4+P4+P4+M3: Gb B E A C
+          5. P4+P4+M3+P4: F Bb Eb G C
+          6. Other options are combinations of P4, TT and M3
 
 Rhythmic Development
 --------------------
